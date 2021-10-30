@@ -1,0 +1,47 @@
+<aura:component controller="DogMatcherController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global">
+    <aura:attribute name="tileDensityFactor" type="Integer" access="public" default="2" />
+    <aura:attribute name="tileRevealDuration" type="Integer" access="public" default="3" />
+    <aura:attribute name="isBoardLoaded" type="Boolean" access="private" default="false" />
+    <aura:attribute name="tileQuantity" type="Integer" access="private" default="4" />
+    <aura:attribute name="boardWidth" type="Integer" access="private" default="680" />
+    <aura:attribute name="dogs" type="Map[]" access="private" />
+    <aura:attribute name="numberOfTilesRevealed" type="Integer" access="private" default="0" />
+    <aura:attribute name="flippedTileIndex" type="Integer" access="private" />
+    <aura:attribute name="flippedTileImageUrl" type="String" access="private" />
+    <aura:attribute name="tilesMatchedQuantity" type="Integer" access="private" default="0" />
+    <aura:attribute name="boardResetTimerId" type="Integer" access="private" />
+
+    <aura:registerEvent name="logEvent" type="c:DogMatcherEventLog" />
+    <aura:registerEvent name="boardResetEvent" type="c:DogMatcherEventBoardReset" />
+    <aura:registerEvent name="pairRevealedEvent" type="c:DogMatcherEventPairRevealed" />
+    <aura:registerEvent name="gameOverEvent" type="c:DogMatcherEventGameOver" />
+
+    <aura:handler name="init" value="{! this }" action="{! c.init }" />
+    <aura:handler name="tileFlippedEvent" event="c:DogMatcherEventTileFlipped" action="{! c.handleTileFlippedEvent }" />
+    <aura:handler name="change" value="{! v.tileDensityFactor }" action="{! c.tileDensityFactorChanged }" />
+    <aura:handler name="change" value="{! v.tileRevealDuration }" action="{! c.tileRevealDurationChanged }" />
+
+    <aura:method name="getTileQuantity" action="{! c.getTileQuantity }" />
+    <aura:method name="resetBoard" action="{! c.resetBoard }" />
+
+    <div id="dog-matcher-board-content-container">
+        <aura:if isTrue="{! v.isBoardLoaded }">
+            <div id="dog-matcher-tiles-container" style="{! 'width: ' + v.boardWidth + 'px' }">
+                <aura:iteration items="{! v.dogs }" var="dog" indexVar="dogIndex">
+                    <c:DogMatcherTile aura:id="tile" tileIndex="{! dogIndex }" imageUrl="{! dog.imageUrl }" />
+                </aura:iteration>
+            </div>
+        <aura:set attribute="else">
+            <div id="dog-matcher-tiles-container-spinner" style="{! 'width: ' + v.boardWidth + 'px; height: ' + v.boardWidth + 'px' }">
+                <div class="slds-spinner_container">
+                    <div role="status" class="slds-spinner slds-spinner_medium">
+                    <span class="slds-assistive-text">Loading Dog Matcher tiles...</span>
+                    <div class="slds-spinner__dot-a"></div>
+                    <div class="slds-spinner__dot-b"></div>
+                    </div>
+                </div>
+            </div>
+        </aura:set>
+        </aura:if>
+    </div>
+</aura:component>

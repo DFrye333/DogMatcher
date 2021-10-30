@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <brand>
+        <headerColor>#0DC143</headerColor>
+        <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
+    </brand>
+    <description>Play everybody's favorite dog-themed tile-based pair-matching memory game, Dog Matcher!</description>
+    <formFactors>Large</formFactors>
+    <label>Dog Matcher</label>
+    <navType>Standard</navType>
+    <tabs>Dog_Matcher</tabs>
+    <uiType>Lightning</uiType>
+</CustomApplication>

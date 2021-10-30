@@ -1,0 +1,5 @@
+<aura:event type="COMPONENT" description="A Dog Matcher message has been logged.">
+    <aura:attribute name="message" type="String" />
+    <aura:attribute name="type" type="String" default="string" />
+    <aura:attribute name="isDeveloperLog" type="Boolean" default="true" />
+</aura:event>

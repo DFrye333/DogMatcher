@@ -1,0 +1,5 @@
+<aura:event type="COMPONENT" description="A Dog Matcher tile has been flipped!">
+    <aura:attribute name="tileIndex" type="Integer" />
+    <aura:attribute name="imageUrl" type="String" />
+    <aura:attribute name="isRevealed" type="Boolean" />
+</aura:event>

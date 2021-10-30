@@ -1,0 +1,90 @@
+<aura:component controller="DogMatcherController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global">
+    <aura:attribute name="tileDensityFactor" type="Integer" access="public" default="2" />
+    <aura:attribute name="tileRevealDuration" type="Integer" access="public" default="3" />
+    <aura:attribute name="startPlayTime" type="Integer" access="private" />
+    <aura:attribute name="elapsedPlayTime" type="Integer" access="private" default="0" />
+    <aura:attribute name="playTimerId" type="Integer" access="private" />
+    <aura:attribute name="playerCurrentScore" type="Integer" access="private" default="0" />
+    <aura:attribute name="playerHighScore" type="Integer" access="private" default="0" />
+    <aura:attribute name="matchesHit" type="Integer" access="private" default="0" />
+    <aura:attribute name="matchesMissed" type="Integer" access="private" default="0" />
+    <aura:attribute name="baseMatchValue" type="Integer" access="private" default="10" />
+    <aura:attribute name="matchStreak" type="Integer" access="private" default="0" />
+    <aura:attribute name="totalMatchStreakMultiplier" type="Integer" access="private" default="0" />
+    <aura:attribute name="obtainedImpressiveMatchStreak" type="Boolean" access="private" default="false" />
+    <aura:attribute name="obtainedPerfection" type="Boolean" access="private" default="false" />
+    <aura:attribute name="isDeveloperModeEnabled" type="Boolean" access="private" default="false" />
+
+    <aura:handler name="init" value="{! this }" action="{! c.init }" />
+    <aura:handler name="logEvent" event="c:DogMatcherEventLog" action="{! c.handleLogEvent }" />
+    <aura:handler name="tileFlippedEvent" event="c:DogMatcherEventTileFlipped" action="{! c.handleTileFlippedEvent }" />
+    <aura:handler name="boardResetEvent" event="c:DogMatcherEventBoardReset" action="{! c.handleBoardResetEvent }" />
+    <aura:handler name="pairRevealedEvent" event="c:DogMatcherEventPairRevealed" action="{! c.handlePairRevealedEvent }" />
+    <aura:handler name="gameOverEvent" event="c:DogMatcherEventGameOver" action="{! c.handleGameOverEvent }" />
+
+    <div id="dog-matcher-content-container">
+        <div id="dog-matcher-game-container" class="{! (v.obtainedImpressiveMatchStreak ? ' obtained-impressive-multiplier ' : '') +
+                                                    (v.obtainedPerfection ? ' obtained-perfection ' : '') }">
+            <h1 id="dog-matcher-header">
+                Dog Matcher!
+            </h1>
+            <div id="dog-matcher-how-to-play">
+                Click a tile to reveal the cute dog underneath. Only two tiles can be revealed at a time. Match all dog pairs to win the game!
+            </div>
+            <hr />
+            <div id="dog-matcher-board-container">
+                <c:DogMatcherBoard
+                    aura:id="dog-matcher-board"
+                    tileDensityFactor="{! v.tileDensityFactor }"
+                    tileRevealDuration="{! v.tileRevealDuration }" />
+            </div>
+            <div id="dog-matcher-options-container">
+                <span id="dog-matcher-controls-container">
+                    <lightning:button
+                        name="dog-matcher-new-game-button"
+                        label="New Game"
+                        title="New Game"
+                        onclick="{! c.handleNewGameButtonClick }" />
+                    <lightning:button
+                        name="dog-matcher-developer-mode-button"
+                        label="Dev Mode"
+                        title="Dev Mode"
+                        class="{! v.isDeveloperModeEnabled ? 'dev-mode-enabled' : '' }"
+                        onclick="{! c.handleDevModeButtonClick }" />
+                </span>
+                <span id="dog-matcher-input-container">
+                    <lightning:input
+                        id="dog-matcher-board-density-factor-input"
+                        name="dog-matcher-board-density-factor-input"
+                        type="number"
+                        label="Tile Density Factor"
+                        value="{! v.tileDensityFactor }" />
+                    <lightning:input
+                        id="dog-matcher-board-tile-reveal-duration-input"
+                        name="dog-matcher-board-tile-reveal-duration-input"
+                        type="number"
+                        label="Tile Reveal Duration (Seconds)"
+                        value="{! v.tileRevealDuration }" />
+                </span>
+                <span id="dog-matcher-readout-container">
+                    <div id="dog-matcher-player-current-score-streak-multiplier">
+                        Streak Multiplier:
+                        {! v.obtainedPerfection ? 'PERFECTION' : v.matchStreak + 1 + 'x' }
+                    </div>
+                    <div id="dog-matcher-player-current-score">
+                        Your Current Score:
+                        {! v.playerCurrentScore }
+                    </div>
+                    <div id="dog-matcher-player-high-score">
+                        Your High Score:
+                        {! v.playerHighScore }
+                    </div>
+                    <div id="dog-matcher-elapsed-play-timer">
+                        Time (Seconds):
+                        {! v.elapsedPlayTime }
+                    </div>
+                </span>
+            </div>
+        </div>
+    </div>
+</aura:component>

@@ -1,0 +1,18 @@
+.THIS {
+    display: inline-block;
+    position: relative;
+}
+
+.THIS #dog-matcher-tiles-container {
+    display: inline-block;
+    background-color: cornflowerblue;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-sizing: content-box;
+}
+
+.THIS #dog-matcher-tiles-container-spinner {
+    display: inline-block;
+    background-color: cornflowerblue;
+    border: 1px solid black;
+}

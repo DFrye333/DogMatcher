@@ -1,0 +1,32 @@
+<aura:component>
+    <aura:attribute name="tileIndex" type="Integer" access="public" />
+    <aura:attribute name="imageUrl" type="String" access="public" />
+    <aura:attribute name="isRevealed" type="Boolean" access="private" default="false" />
+    <aura:attribute name="isMatched" type="Boolean" access="private" default="false" />
+    <aura:attribute name="isMismatched" type="Boolean" access="private" default="false" />
+
+    <aura:registerEvent name="tileFlippedEvent" type="c:DogMatcherEventTileFlipped" />
+
+    <aura:method name="flipTile" action="{! c.flipTile }">
+        <aura:attribute name="isRevealed" type="Boolean" default="false" />
+    </aura:method>
+    <aura:method name="setTileMatchState" action="{! c.setTileMatchState }">
+        <aura:attribute name="isMatch" type="Boolean" default="false" />
+        <aura:attribute name="tileRevealDuration" type="Integer" default="3" />
+    </aura:method>
+
+    <div id="dog-matcher-tile-container" class="{! (v.isRevealed == true ? ' tile-revealed ' : '') +
+                (v.isMatched == true ? ' tile-matched ' : '') +
+                (v.isMismatched == true ? ' tile-mismatched ' : '') }"  onclick="{! c.requestTileFlip }">
+        <div class="dog-matcher-tile-side-container" style="{! 'display: ' + (v.isRevealed == true ? 'inline-block' : 'none') }">
+            <img src="{! v.imageUrl }" title="Click to flip!" />
+        </div>
+        <div class="dog-matcher-tile-side-container" style="{! 'display: ' + (v.isRevealed == true ? 'none' : 'inline-block') }">
+            <div class="dog-matcher-tile-back">
+                <div class="dog-matcher-tile-back-text">
+                    Dog Matcher!
+                </div>
+            </div>
+        </div>
+    </div>
+</aura:component>

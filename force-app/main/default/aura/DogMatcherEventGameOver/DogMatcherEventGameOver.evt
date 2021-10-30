@@ -1,0 +1,1 @@
+<aura:event type="COMPONENT" description="The Dog Matcher game has ended." />

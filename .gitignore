@@ -1,0 +1,4 @@
+.sfdx
+.vscode
+test_results
+test_results/test-result.txt

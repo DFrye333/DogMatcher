@@ -1,0 +1,93 @@
+.THIS {
+    text-align: center;
+}
+
+.THIS #dog-matcher-game-container {
+    background-color: whitesmoke;
+    border: 1px solid black;
+    border-radius: 5px;
+    display: inline-block;
+    padding: 10px;
+    margin: auto;
+}
+
+.THIS #dog-matcher-game-container.obtained-perfection {
+    border: 10px solid orangered;
+}
+
+.THIS #dog-matcher-header {
+    font-size: 32px;
+}
+
+.THIS #dog-matcher-how-to-play {
+    font-size: 14px;
+}
+
+.THIS #dog-matcher-options-container {
+    display: inline-block;
+    width: 650px;
+    height: 112px;
+    margin: auto;
+}
+
+.THIS #dog-matcher-controls-container {
+    float: left;
+    width: 115px;
+    height: 100%;
+    padding: 24px 0;
+    margin: 0 5px;
+}
+
+.THIS #dog-matcher-controls-container button {
+    width: 100%;
+    margin: 5px 0;
+}
+
+.THIS #dog-matcher-controls-container [name="dog-matcher-developer-mode-button"].dev-mode-enabled {
+    background-color: darkturquoise;
+    font-weight: bold;
+}
+
+.THIS #dog-matcher-input-container {
+    float: left;
+    width: 185px;
+    height: 100%;
+    margin: 0 5px;
+}
+
+.THIS #dog-matcher-input-container lightning-input {
+    float: left;
+    width: 185px;
+    margin: auto;
+}
+
+.THIS #dog-matcher-input-container lightning-input label {
+    float: left;
+    font-weight: bold;
+}
+
+.THIS #dog-matcher-input-container lightning-input div {
+    width: 60px;
+}
+
+.THIS #dog-matcher-readout-container {
+    display: inline-block;
+    width: 300px;
+    height: 100%;
+    margin: 0 5px;
+    text-align: right;
+}
+
+.THIS #dog-matcher-readout-container div {
+    font-size: 18px;
+}
+
+.THIS #dog-matcher-game-container.obtained-impressive-multiplier #dog-matcher-player-current-score-streak-multiplier,
+.THIS #dog-matcher-game-container.obtained-perfection #dog-matcher-player-current-score-streak-multiplier {
+    color: orangered;
+    font-weight: bold;
+}
+
+.THIS hr {
+    margin: 1rem;
+}
