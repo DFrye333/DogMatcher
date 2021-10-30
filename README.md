@@ -12,7 +12,7 @@ What more do you need to know?
 
 OK, I suppose there is a bit more. To install:
 
-1. Get yourself an org.
+1. Get yourself a Salesforce.com (SFDC) org.
 1. Push Dog Matcher into the org.
 1. Assign the player's SF user the "Dog Matcher" permission set.
 1. Thank me later!
